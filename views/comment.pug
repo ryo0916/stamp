@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  div
+    h2 テストページ
+    form(action="/comment" method="post")
+      span コメント: #[input(type="text" name="comment" required)]
+      br
+      button(type="submit") コメントする
+    ul
+      each val in commentList
+        li #{val.comment}  
+          #{val.created_at}
+      
+      

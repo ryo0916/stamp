@@ -3,11 +3,11 @@ extends layout
 block content
   div
     h2= title
-    form(action="../register" method="post")
+    form(action="/register" method="post")
       span ユーザー名 : #[input(type="text" name="user_name" required)]
       br
       br
-      span Eメール : #[input(type="email" name="email" required)]
+      span Eメール : #[input(type="text" name="email" required)]
       br
       br
       span パスワード : #[input(type="password" name="password" required)]
