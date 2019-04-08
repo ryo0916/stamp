@@ -4,9 +4,13 @@ let moment = require('moment');
 let connection = require('../mysqlConnection');
 
 router.get('/', function(req, res, next) {
-  res.render('register', {
-    title: '新規登録'
-  });
+  if (req.session.user_id) {
+    res.redirect('/');
+  } else {
+    res.render('register', {
+      title: '新規登録'
+    });
+  }
 });
 
 router.post('/', function(req, res, next) {

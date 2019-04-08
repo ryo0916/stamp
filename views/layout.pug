@@ -22,10 +22,10 @@ html(lang="ja")
           a(class="navbar-item navbar-menu" href="../") ホーム
           a(class="navbar-item navbar-menu" href="###.html") 地図を作る
           a(class="navbar-item navbar-menu" href="###.html") お店を探す
-          if typeof user === 'undefined'
+          if user === null
             a(class="navbar-item navbar-menu" href="../register") 新規登録
             a(class="navbar-item navbar-menu" href="../login") ログイン
-          if typeof user !== 'undefined'
+          if user !== null
             a(class="navbar-item navbar-menu" href="../mypage") マイページ 
 
 

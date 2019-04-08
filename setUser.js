@@ -7,6 +7,7 @@ module.exports = function(req, res, next) {
     connection.query(query, function(err, rows) {
       if (!err) {
         res.locals.user = rows.length? rows[0]: false;
+        console.log(res.locals.user.name);
       }
     });
   }

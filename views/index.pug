@@ -27,18 +27,16 @@ block content
 
   div
     p ふと、これから飲みに行こうとした時にスマホでお店を探すと時間がかかりませんか?#[br] また、食べに行きたいと思ったお店を忘れてしまい、しばらく経った後に思い出すということはありませんか?
-
     p stampは気になるお店に #[strong マーカー] を付けて #[strong 保存] することができます。#[br]オリジナルのグルメマップを作成しておくことで、簡単に素早く #[strong イチオシのお店] を探せます。
-  div
-    button 新規登録
-    br
-    br
+  br
+  br
+
   div 
-    h2  グルメマップ例
+    h2  グルメマップ 作成例
     h3 【新宿】おすすめラーメン10選
     div(id="mapid")
     br
-    button 新規登録
+    p コメントは #[a(href="../comment") こちらまで]
   
   if typeof user !== 'undefined'
     span(class="login-user") #{user.name}さんとしてログインしています
