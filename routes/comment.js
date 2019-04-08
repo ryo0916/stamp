@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
       title: 'テストページ',
       commentList: rows
      });
-     console.log(rows);
   });
 
 });
@@ -20,9 +19,8 @@ router.post('/', function(req, res, next) {
   let comment = req.body.comment;
   let createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
   let query = 'INSERT INTO comments (comment, created_at) VALUES ("' + comment + '", ' + '"' + createdAt + '")';
-  console.log(comment);
-  console.log(connection.query);
   connection.query(query, function(err, rows) {
+    console.log(query);
     res.redirect('/comment');
   });
 });

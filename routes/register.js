@@ -19,12 +19,14 @@ router.post('/', function(req, res, next) {
   connection.query(checkEmailQuery, function(err, email) {
     let emailExists = email.length;
     if (emailExists) {
+      console.log("メール重複");
       res.render('register', {
         title: '新規登録',
         emailExists: 'メールアドレスは既に登録されています'
       });
     } else {
       connection.query(registerQuery, function(err, rows) {
+        console.log(registerQuery);
         res.redirect('/login');
       });
     }
