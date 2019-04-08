@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  div
+    h2= title
+    form(action="/login" method="post")
+      span Eメール : #[input(type="email" name="email" required)]
+      br
+      br
+      span パスワード : #[input(type="password" name="password" required)]
+      br
+      br
+      button(type="submit") ログイン
+    if typeof noUser !== 'undefined'
+      p= noUser

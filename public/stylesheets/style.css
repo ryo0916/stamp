@@ -51,6 +51,16 @@ a {
   background: linear-gradient(transparent 60%, #d16d16 0%);
 }
 
+.login-user {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 5px;
+  font-size: 12px;
+  border: 1px #ccc solid;
+  background-color: #fff;
+}
+
 #mapid {
   height: 600px;
 }

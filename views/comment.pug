@@ -10,5 +10,7 @@ block content
     ul
       each val in commentList
         li #{val.comment} |  #{val.created_at}
+    if typeof user !== 'undefined'
+      span(class="login-user") #{user.name}さんとしてログインしています
       
       
