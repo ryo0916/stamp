@@ -1,0 +1,67 @@
+body {
+  padding: 40px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: brown;
+}
+
+.navbar-inner {
+  background: transparent;
+}
+
+.navbar-brand-char {
+  color: black;
+  font-weight: 500;
+  font-size: 1vw;
+
+}
+
+.navbar-left {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 1;
+
+}
+
+.logo-right {
+  margin-right: 0.8em;
+  margin-top: 0.4em;
+}
+
+.navbar-right {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 1;
+}
+
+.navbar-menu {
+  margin-right: 0.8em;
+}
+
+.top-catchword {
+  font-size: 1vw;
+  color: white;
+  margin-top: 1em;
+  margin-left: 1em;
+}
+
+.intensify-catch {
+  background: linear-gradient(transparent 60%, #d16d16 0%);
+}
+
+#mapid {
+  height: 600px;
+}
+
+.marker {
+  width: 20px !important;
+  height: 20px !important;
+  margin: -10px !important;
+  border-radius: 10px;
+  border: 3px solid #fdfdfd;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  background-color: #f20d0d;
+  z-index: 20 !important;
+}
