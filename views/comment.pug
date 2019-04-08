@@ -2,13 +2,17 @@ extends layout
 
 block content
   div
-    h2 テストページ
+    h2 感想ページ
+    p ご意見があればいただけると、助かります！
     form(action="/comment" method="post")
-      span コメント: #[input(type="text" name="comment" required)]
+      span コメント: #[input(type="text" name="comment" required)] #[button(type="submit") コメントする]
       br
-      button(type="submit") コメントする
+      br
+      
     ul
       each val in commentList
         li #{val.comment} |  #{val.created_at}
+    if typeof user !== 'undefined'
+      span(class="login-user") #{user.name}さんとしてログインしています
       
       
