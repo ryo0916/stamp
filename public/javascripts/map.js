@@ -32,7 +32,7 @@ function index_ramen(map) {
   const ramen7 = L.popup().setContent("風雲児")
   const ramen8 = L.popup().setContent("万世麺店 新宿西口店")
   const ramen9 = L.popup().setContent("らーめん山頭火 新宿南口店")
-  const ramen10 = L.popup().setContent("メンショー サン フランシスコ")
+  const ramen10 = L.popup().setContent("メンショー サンフランシスコ")
   L.marker([35.687351,139.703862],{icon: L.divIcon({className: 'marker'})},{title:"つけ麺 五ノ神製作所"}).bindPopup(ramen1).addTo(map);
   L.marker([35.688749,139.708282],{icon: L.divIcon({className: 'marker'})},{title:"SOBA HOUSE 金色不如帰"}).bindPopup(ramen2).addTo(map);
   L.marker([35.695485,139.698058],{icon: L.divIcon({className: 'marker'})},{title:"えびそば 一幻"}).bindPopup(ramen3).addTo(map);
@@ -42,7 +42,7 @@ function index_ramen(map) {
   L.marker([35.686845,139.696646],{icon: L.divIcon({className: 'marker'})},{title:"風雲児"}).bindPopup(ramen7).addTo(map);
   L.marker([35.691321,139.699615],{icon: L.divIcon({className: 'marker'})},{title:"万世麺店 新宿西口店"}).bindPopup(ramen8).addTo(map);
   L.marker([35.688733,139.698456],{icon: L.divIcon({className: 'marker'})},{title:"らーめん山頭火 新宿南口店"}).bindPopup(ramen9).addTo(map);
-  L.marker([35.689455,139.699777],{icon: L.divIcon({className: 'marker'})},{title:"メンショー サン フランシスコ"}).bindPopup(ramen10).addTo(map);
+  L.marker([35.689455,139.699777],{icon: L.divIcon({className: 'marker'})},{title:"メンショー サンフランシスコ"}).bindPopup(ramen10).addTo(map);
 }
 
 init();
