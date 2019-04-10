@@ -2,7 +2,7 @@ extends layout
 
 block content
   div
-    h2= title
+    h2 #[span.heading #{title} ]
     form(action="/login" method="post")
       span Eメール : #[input(type="email" name="email" required)]
       br
@@ -11,5 +11,7 @@ block content
       br
       br
       button(type="submit") ログイン
+      if register
+        span まだ登録されていない方は、#[a(href="../../register") こちら]から
     if typeof noUser !== 'undefined'
       p= noUser

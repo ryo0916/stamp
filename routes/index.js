@@ -4,7 +4,22 @@ let moment = require('moment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Stamp' });
+  if (req.session.user_id) {
+    res.render('index', { 
+      title: 'Stamp ログイン中',
+      newMap: '地図を作る',
+      viewMap: '地図を見る',
+      mypage: 'マイページ',
+      logout: 'ログアウト'
+     });
+  } else {
+    res.render('index', {
+      title: 'Stamp',
+      register: '新規登録',
+      login: 'ログイン'
+    });
+  }
+  
 });
 
 router.post('/', function(req, res, next) {

@@ -11,7 +11,9 @@ const register = require('./routes/register');
 const comment = require('./routes/comment');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
-const setUser = require('./setUser');
+const newMap = require('./routes/newMap');
+const viewMap = require('./routes/viewMap');
+const editmap = require('./routes/editmap');
 
 const app = express();
 
@@ -30,12 +32,15 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use('/', setUser, indexRouter);
+app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/register', register);
-app.use('/comment', setUser, comment);
+app.use('/comment', comment);
 app.use('/login', login);
 app.use('/logout', logout);
+app.use('/newMap', newMap);
+app.use('/viewMap', viewMap);
+app.use('/editmap', editmap);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

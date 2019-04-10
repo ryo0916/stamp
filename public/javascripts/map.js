@@ -1,6 +1,6 @@
 // 初期化処理
 function init() {
-  map = L.map('mapid').setView([35.691213, 139.701106],16);
+  let map = L.map('mapid').setView([35.691213, 139.701106],16);
   let osmUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
   const osmAttribute = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>';
   L.tileLayer(osmUrl,{
@@ -17,22 +17,23 @@ function init() {
     metric: true
   }).addTo(map);
 
+  
   index_ramen(map);
 
 }
 
 // トップページのおすすめラーメンを追加
 function index_ramen(map) {
-  const ramen1 = L.popup().setContent("つけ麺 五ノ神製作所");
-  const ramen2 = L.popup().setContent("SOBA HOUSE 金色不如帰" + "<br>" + "星星星星");
-  const ramen3 = L.popup().setContent("えびそば 一幻");
-  const ramen4 = L.popup().setContent("麺屋海神")
-  const ramen5 = L.popup().setContent("一蘭 新宿中央東口店")
-  const ramen6 = L.popup().setContent("AFURI 新宿店")
-  const ramen7 = L.popup().setContent("風雲児")
-  const ramen8 = L.popup().setContent("万世麺店 新宿西口店")
-  const ramen9 = L.popup().setContent("らーめん山頭火 新宿南口店")
-  const ramen10 = L.popup().setContent("メンショー サンフランシスコ")
+  const ramen1 = L.popup().setContent("つけ麺 五ノ神製作所<br><a target=_blank rel=noopener noreferrer href=http://gonokamiseisakusho.com/>ホームページ<a>");
+  const ramen2 = L.popup().setContent("SOBA HOUSE 金色不如帰<br><a target=_blank rel=noopener noreferrer href=https://twitter.com/ptwgqjbfwgjw>ツイッター<a>");
+  const ramen3 = L.popup().setContent("えびそば 一幻<br><a target=_blank rel=noopener noreferrer href=http://www.ebisoba.com/>ホームページ<a>");
+  const ramen4 = L.popup().setContent("麺屋海神<br><a target=_blank rel=noopener noreferrer href=https://tabelog.com/tokyo/A1320/A132001/13117094/>食べログ<a>")
+  const ramen5 = L.popup().setContent("一蘭 新宿中央東口店<br><a target=_blank rel=noopener noreferrer href=https://ichiran.com/shop/tokyo/shinjuku/>ホームページ<a>")
+  const ramen6 = L.popup().setContent("AFURI 新宿店<br><a target=_blank rel=noopener noreferrer href=http://afuri.com/findus/>ホームページ<a>")
+  const ramen7 = L.popup().setContent("風雲児<br><a target=_blank rel=noopener noreferrer href=http://www.fu-unji.com/index.html>ホームページ<a>")
+  const ramen8 = L.popup().setContent("万世麺店 新宿西口店<br><a target=_blank rel=noopener noreferrer href=https://www.niku-mansei.com/contents/02shiten/02tokyo_ra_sinjyuku.html>ホームページ<a>")
+  const ramen9 = L.popup().setContent("らーめん山頭火 新宿南口店<br><a target=_blank rel=noopener noreferrer href=https://www.santouka.co.jp/shop-jp/kanto/area03-004>ホームページ<a>")
+  const ramen10 = L.popup().setContent("メンショー サンフランシスコ<br><a target=_blank rel=noopener noreferrer href=http://menya-shono.com/menshosf/>ホームページ<a>")
   L.marker([35.687351,139.703862],{icon: L.divIcon({className: 'marker'})},{title:"つけ麺 五ノ神製作所"}).bindPopup(ramen1).addTo(map);
   L.marker([35.688749,139.708282],{icon: L.divIcon({className: 'marker'})},{title:"SOBA HOUSE 金色不如帰"}).bindPopup(ramen2).addTo(map);
   L.marker([35.695485,139.698058],{icon: L.divIcon({className: 'marker'})},{title:"えびそば 一幻"}).bindPopup(ramen3).addTo(map);

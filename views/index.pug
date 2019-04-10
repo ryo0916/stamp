@@ -32,14 +32,13 @@ block content
   br
 
   div 
-    h2  グルメマップ 作成例
-    h3 【新宿】おすすめラーメン10選
+    h3 #[span.heading グルメマップ 作成例 ]
+    br
+    h4 【新宿】おすすめラーメン10選
     div(id="mapid")
     br
-    p コメントは #[a(href="../comment") こちらまで]
-  
-  if typeof user !== 'undefined'
-    span(class="login-user") #{user.name}さんとしてログインしています
+    p このサイトについてのコメントは #[a(href="../comment") こちらまで]
+
   
   script(type='text/javascript' src="javascripts/map.js")
 
