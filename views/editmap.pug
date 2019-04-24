@@ -22,7 +22,12 @@ block content
     input(type="text" name="markerTitle" id="updateTitle" placeholder="タイトル" required)
     input(type="text" name="comment" id="updateComment" placeholder="コメント(任意)")
     button(type="submit") 作成
-    
+
+  form(action="/editmap/?_method=delete" method="post")
+    input(type="number" name="map_id" value=map_id style="display:none;")
+    input(type="text" name="deleteLat" id="deleteLat" )
+    input(type="text" name="deleteLng" id="deleteLng" style="display: none;")
+    button(type="submit") 削除
 
   script(type='text/javascript').
     
@@ -80,47 +85,27 @@ block content
 
     });
 
-    // クリックしたマーカーの内容を更新
+    // クリックしたマーカーの緯度経度を取得
     function update_marker(e) {
 
-      /*  自動入力は取り除く
-
-      // タイトルの取得
-      let clickedContent = e.target._popup._content;
-      let updateTitle = document.getElementById('updateTitle');
-
-      const regExpTitle = /<(".*?"|'.*?'|[^'"])*?>/g;
-      clickedContent = clickedContent.replace(regExpTitle, " ");
-      updateTitle.value = clickedContent;
-
-      // コメントの取得
-      let clickedComment = e.target._popup._content;
-      let updateComment = document.getElementById('updateComment');
-
-      const regExpComment = /\S/;
-      clickedComment = clickedComment.replace(regExpComment, "");
-      updateComment.value = clickedComment;
-
-      */
-
-      // latitudeの取得
+      // アップデート分のlatitudeを取得
       let clickedLat = e.latlng.lat;
       let currentLat = document.getElementById('currentLat');
       currentLat.value = clickedLat;
 
-      // longitudeの取得
+      // アップデート分のlongitudeを取得
       let clickedLng = e.latlng.lng;
       let currentLng = document.getElementById('currentLng');
       currentLng.value = clickedLng;
+
+      // 削除分のlatitudeの取得
+      let deleteLat = document.getElementById('deleteLat');
+      deleteLat.value = clickedLat;
+
+      // 削除分のlongitudeの取得
+      let deleteLng = document.getElementById('deleteLng');
+      deleteLng.value = clickedLng;
     };
-
-    // マーカー削除 
-    /*
-    function delete_marker(e) {
-
-    };
-    */
-
 
     function index_marker(map) {
       let list = markers;

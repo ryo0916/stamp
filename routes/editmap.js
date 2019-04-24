@@ -41,7 +41,16 @@ router.put('/', function(req, res, next) {
   let comment = req.body.comment;
   let updateQuery = 'UPDATE markers SET title = "' + markerTitle + '", comment = "' + comment + '" WHERE latitude = "' + currentLat + '" AND longitude = "' + currentLng + '"';
   connection.query(updateQuery, function(err, rows) {
-    console.log('test');
+    res.redirect('/editmap/' + map_id);
+  });
+});
+
+router.delete('/', function(req, res, next) {
+  let map_id = req.body.map_id;
+  let deleteLat = req.body.deleteLat;
+  let deleteLng = req.body.deleteLng;
+  let deleteQuery = 'DELETE FROM markers WHERE latitude = "' + deleteLat + '" AND longitude = "' + deleteLng + '"';
+  connection.query(deleteQuery, function(err, rows) {
     res.redirect('/editmap/' + map_id);
   });
 });
