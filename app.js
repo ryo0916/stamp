@@ -41,8 +41,8 @@ app.use('/register', register);
 app.use('/comment', comment);
 app.use('/login', login);
 app.use('/logout', logout);
-app.use('/newMap', newMap);
-app.use('/viewMap', viewMap);
+app.use('/newmap', newMap);
+app.use('/viewmap', viewMap);
 app.use('/editmap', editmap);
 
 // catch 404 and forward to error handler
