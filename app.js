@@ -12,8 +12,8 @@ const register = require('./routes/register');
 const comment = require('./routes/comment');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
-const newMap = require('./routes/newMap');
-const viewMap = require('./routes/viewMap');
+const newmap = require('./routes/newmap');
+const viewmap = require('./routes/viewmap');
 const editmap = require('./routes/editmap');
 
 const app = express();
@@ -41,8 +41,8 @@ app.use('/register', register);
 app.use('/comment', comment);
 app.use('/login', login);
 app.use('/logout', logout);
-app.use('/newmap', newMap);
-app.use('/viewmap', viewMap);
+app.use('/newmap', newmap);
+app.use('/viewmap', viewmap);
 app.use('/editmap', editmap);
 
 // catch 404 and forward to error handler
