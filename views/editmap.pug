@@ -82,21 +82,26 @@ block content
 
     // クリックしたマーカーの内容を更新
     function update_marker(e) {
-      console.log(e);
+
+      /*  自動入力は取り除く
 
       // タイトルの取得
       let clickedContent = e.target._popup._content;
-      // const regExpTitle = /(<([^>]+)>)/ig;
       let updateTitle = document.getElementById('updateTitle');
-      // clickedContent = clickedContent.replace(regExpTitle, "");
+
+      const regExpTitle = /<(".*?"|'.*?'|[^'"])*?>/g;
+      clickedContent = clickedContent.replace(regExpTitle, " ");
       updateTitle.value = clickedContent;
 
       // コメントの取得
       let clickedComment = e.target._popup._content;
-      // const regExpComment = /(<([^>]+)>)/ig;
       let updateComment = document.getElementById('updateComment');
-      // clickedComment = clickedComment.replace(regExpComment, "");
+
+      const regExpComment = /\S/;
+      clickedComment = clickedComment.replace(regExpComment, "");
       updateComment.value = clickedComment;
+
+      */
 
       // latitudeの取得
       let clickedLat = e.latlng.lat;
