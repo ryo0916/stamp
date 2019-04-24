@@ -3,7 +3,7 @@ extends layout
 block content
 
   h2 マーカー編集ページ
-  p Map-Number: #{map_id}
+  p マップ名: #{map_name}, Map-ID: #{map_id}
 
   div(id="mapid")
 
@@ -25,7 +25,7 @@ block content
 
   form(action="/editmap/?_method=delete" method="post")
     input(type="number" name="map_id" value=map_id style="display:none;")
-    input(type="text" name="deleteLat" id="deleteLat" )
+    input(type="text" name="deleteLat" id="deleteLat" style="display: none;")
     input(type="text" name="deleteLng" id="deleteLng" style="display: none;")
     button(type="submit") 削除
 
@@ -66,7 +66,6 @@ block content
       $('#longitude').val(e.latlng.lng);
       console.log(e.latlng);
 
-
       // 緯度の桁数を調整
       let currentLat = e.latlng.lat;
       currentLat = Math.floor((currentLat * 100000000 )) / 100000000;
@@ -82,11 +81,10 @@ block content
       // 経度をフォームに入力
       let setLongitude = document.getElementById('setLongitude');
       setLongitude.value = currentLng;
-
     });
 
     // クリックしたマーカーの緯度経度を取得
-    function update_marker(e) {
+    function check_marker(e) {
 
       // アップデート分のlatitudeを取得
       let clickedLat = e.latlng.lat;
@@ -111,7 +109,7 @@ block content
       let list = markers;
       Object.keys(list).forEach(function(key) {
           let marker = L.popup().setContent('<b>' + list[key].title + '</b>' + '<br>' + list[key].comment);
-          L.marker([list[key].latitude, list[key].longitude],{icon: L.divIcon({className: 'marker'})},{title: list[key].title}).bindPopup(marker).addTo(map).on('click', function(e) { update_marker(e); });
+          L.marker([list[key].latitude, list[key].longitude],{icon: L.divIcon({className: 'marker'})},{title: list[key].title}).bindPopup(marker).addTo(map).on('click', function(e) { check_marker(e); });
       });
     };
     index_marker(map);

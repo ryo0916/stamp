@@ -9,13 +9,30 @@ router.get('/:map_id', function(req, res, next) {
   let getMarkerQuery = 'SELECT * FROM markers WHERE map_id =' + mapId;
   connection.query(query, function(err, map) {
     connection.query(getMarkerQuery, function(err, marker) {
-      res.render('editmap', {
-        map_id: map[0].map_id,
-        map_name: map[0].map_name,
-        center_latitude: map[0].latitude,
-        center_longitude: map[0].longitude,
-        marker_list: marker
-      });
+      if (req.session.user_id) {
+        res.render('editmap', {
+          title: '地図作成',
+          newMap: '地図を作る',
+          viewMap: '地図を見る',
+          mypage: 'マイページ',
+          logout: 'ログアウト',
+
+          map_id: map[0].map_id,
+          map_name: map[0].map_name,
+          center_latitude: map[0].latitude,
+          center_longitude: map[0].longitude,
+          marker_list: marker
+        });
+      } else {
+        res.render('index', {
+          title: '地図作成',
+          register: '新規登録',
+          login: 'ログイン'
+        });
+
+      };
+
+
     });
   });
 });
