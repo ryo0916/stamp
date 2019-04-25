@@ -3,3 +3,10 @@ extends layout
 block content
 
   h2 地図閲覧ページ
+
+  p #{message}
+
+  ul
+    each map in mapList
+      li: a(href='../editmap/' + map.map_id) #{map['map_name']}
+  
