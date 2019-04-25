@@ -7,8 +7,8 @@ router.get('/', function(req, res, next) {
   if (req.session.user_id) {
     res.render('newmap', {
       title: '地図作成',
-      newMap: '地図を作る',
-      viewMap: '地図を見る',
+      newmap: '地図を作る',
+      viewmap: '地図を見る',
       mypage: 'マイページ',
       logout: 'ログアウト'
     });
