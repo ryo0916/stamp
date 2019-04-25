@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
+const methodOverride = require('method-override');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -11,9 +12,13 @@ const register = require('./routes/register');
 const comment = require('./routes/comment');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
-const setUser = require('./setUser');
+const newmap = require('./routes/newmap');
+const viewmap = require('./routes/viewmap');
+const editmap = require('./routes/editmap');
 
 const app = express();
+
+app.use(methodOverride('_method'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,12 +35,15 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use('/', setUser, indexRouter);
+app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/register', register);
-app.use('/comment', setUser, comment);
+app.use('/comment', comment);
 app.use('/login', login);
 app.use('/logout', logout);
+app.use('/newmap', newmap);
+app.use('/viewmap', viewmap);
+app.use('/editmap', editmap);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

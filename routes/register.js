@@ -8,7 +8,8 @@ router.get('/', function(req, res, next) {
     res.redirect('/');
   } else {
     res.render('register', {
-      title: '新規登録'
+      title: '新規登録',
+      login: 'ログイン'
     });
   }
 });

@@ -6,13 +6,27 @@ let connection = require('../mysqlConnection');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   let query = 'SELECT *, DATE_FORMAT(created_at, \'%Y年%m月%d日 %k時%i分%s秒\') AS created_at FROM comments';
-  connection.query(query, function(err, rows) {
-    res.render('comment', {
-      title: 'テストページ',
-      commentList: rows
-     });
-  });
-
+  if (req.session.user_id) {
+    connection.query(query, function(err, rows) {
+      res.render('comment', {
+        title: 'テストページ',
+        commentList: rows,
+        newMap: '地図を作る',
+        viewMap: '地図を見る',
+        mypage: 'マイページ',
+        logout: 'ログアウト'
+       });
+    });
+  } else {
+    connection.query(query, function(err, rows) {
+      res.render('comment', {
+        title: 'テストページ',
+        register: '新規登録',
+        login: 'ログイン',
+        commentList: rows
+       });
+    });
+  }
 });
 
 router.post('/', function(req, res, next) {

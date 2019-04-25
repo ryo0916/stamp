@@ -1,0 +1,136 @@
+extends layout
+
+block content
+
+  h2 マーカー編集ページ
+  p マップ名: #{map_name}, Map-ID: #{map_id}
+
+  div(id="mapid")
+
+  div(id="createmarker" style="display: none;")
+    form(action="/editmap/" method="post")
+      input(type="text" name="latitude" id="setLatitude" style="display: none;")
+      input(type="text" name="longitude" id="setLongitude" style="display: none;")
+      input(type="number" name="map_id" value=map_id style="display:none;")
+      input(type="text" name="markerTitle" placeholder="タイトル" required)
+      input(type="text" name="comment" placeholder="コメント(任意)")
+      button(type="submit") 作成
+  
+  div(id="editmarker" style="display: none;")
+    form(action="/editmap/?_method=put" method="post")
+      input(type="number" name="map_id" value=map_id style="display:none;")
+      input(type="text" name="currentLat" id="currentLat" style="display: none;")
+      input(type="text" name="currentLng" id="currentLng" style="display: none;")
+      input(type="text" name="markerTitle" id="updateTitle" placeholder="タイトル" required)
+      input(type="text" name="comment" id="updateComment" placeholder="コメント(任意)")
+      button(type="submit") 更新
+  
+    form(action="/editmap/?_method=delete" method="post")
+      input(type="number" name="map_id" value=map_id style="display:none;")
+      input(type="text" name="deleteLat" id="deleteLat" style="display: none;")
+      input(type="text" name="deleteLng" id="deleteLng" style="display: none;")
+      button(type="submit") 削除
+
+  script(type='text/javascript').
+    
+    L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.4.0/dist/images/';
+    let mapId = !{map_id};
+    let centerLatitude = !{center_latitude};
+    let centerLongitude = !{center_longitude};
+    let markers = !{JSON.stringify(marker_list)};
+
+    let map = L.map('mapid').setView([centerLatitude, centerLongitude], 14);
+    let osmUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+    const osmAttribute = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>';
+    L.tileLayer(osmUrl,{
+      attribution: osmAttribute,
+      maxZoom: 19,
+    }).addTo(map);
+    
+    // 拡大縮小のボタンの位置を右下に変更
+    map.zoomControl.setPosition('bottomright');
+  
+    // スケールバーを付加
+    L.control.scale({
+      imperial: false,
+      metric: true
+    }).addTo(map);
+
+    // クリックした箇所に配置するマーカーの宣言
+    let latitude = 0;
+    let longitude = 0;
+    let marker = L.marker([latitude, longitude],{icon: L.divIcon({className: 'set-marker'})}).addTo(map);
+
+    // クリックイベントの取得
+    map.on("click",function(e){
+      marker.setLatLng(e.latlng);
+      $('#latitude').val(e.latlng.lat);
+      $('#longitude').val(e.latlng.lng);
+      console.log(e.latlng);
+
+      // 緯度の桁数を調整
+      let currentLat = e.latlng.lat;
+      currentLat = Math.floor((currentLat * 100000000 )) / 100000000;
+  
+      // 緯度をフォームに入力
+      let setLatitude = document.getElementById('setLatitude');
+      setLatitude.value = currentLat;
+
+      // 経度の桁数を調整
+      let currentLng = e.latlng.lng;
+      currentLng = Math.floor((currentLng * 100000000 )) / 100000000;
+
+      // 経度をフォームに入力
+      let setLongitude = document.getElementById('setLongitude');
+      setLongitude.value = currentLng;
+
+      // マーカー作成画面を表示
+      let createMarker = document.getElementById('createmarker');
+      createMarker.style.display = "";
+
+      // マーカー編集画面を非表示
+      let editMarker = document.getElementById('editmarker');
+      editMarker.style.display = "none";
+    });
+
+    // クリックしたマーカーの緯度経度を取得
+    function check_marker(e) {
+
+      // アップデート分のlatitudeを取得
+      let clickedLat = e.latlng.lat;
+      let currentLat = document.getElementById('currentLat');
+      currentLat.value = clickedLat;
+
+      // アップデート分のlongitudeを取得
+      let clickedLng = e.latlng.lng;
+      let currentLng = document.getElementById('currentLng');
+      currentLng.value = clickedLng;
+
+      // 削除分のlatitudeの取得
+      let deleteLat = document.getElementById('deleteLat');
+      deleteLat.value = clickedLat;
+
+      // 削除分のlongitudeの取得
+      let deleteLng = document.getElementById('deleteLng');
+      deleteLng.value = clickedLng;
+
+      // マーカー作成画面を非表示
+      let createMarker = document.getElementById('createmarker');
+      createMarker.style.display = "none";
+
+      // マーカー編集画面を表示
+      let editMarker = document.getElementById('editmarker');
+      editMarker.style.display = "";
+    };
+
+    function index_marker(map) {
+      let list = markers;
+      Object.keys(list).forEach(function(key) {
+          let marker = L.popup().setContent('<b>' + list[key].title + '</b>' + '<br>' + list[key].comment);
+          L.marker([list[key].latitude, list[key].longitude],{icon: L.divIcon({className: 'marker'})},{title: list[key].title}).bindPopup(marker).addTo(map).on('click', function(e) { check_marker(e); });
+      });
+    };
+    index_marker(map);
+
+
+

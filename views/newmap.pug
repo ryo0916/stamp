@@ -1,0 +1,69 @@
+extends layout
+
+block content
+
+  h2 地図作成ページ
+
+  div(id="mapid")
+
+  h4 地図作成の手順
+  p 1. 地図をクリックして、中心点を決める #[br]2. 地図名を記入して作成ボタンを押す
+  form(action="/newMap" method="post")
+    
+    input(type="text" name="latitude" id="setLatitude" style="display: none;")
+    input(type="text" name="longitude" id="setLongitude" style="display: none;")
+    span 地図名: #[input(type="text" name="mapName" retuired)]
+    button(type="submit") 作成
+
+
+  script(type='text/javascript').
+    L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.4.0/dist/images/';
+
+    let map = L.map('mapid').setView([35.691213, 139.701106], 14);
+    let osmUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+    const osmAttribute = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>';
+    L.tileLayer(osmUrl,{
+      attribution: osmAttribute,
+      maxZoom: 19,
+    }).addTo(map);
+    
+    // 拡大縮小のボタンの位置を右下に変更
+    map.zoomControl.setPosition('bottomright');
+  
+    // スケールバーを付加
+    L.control.scale({
+      imperial: false,
+      metric: true
+    }).addTo(map);
+
+    // クリックした箇所に配置するマーカーの宣言
+    let latitude = 0;
+    let longitude = 0;
+    let marker = L.marker([latitude, longitude],{icon: L.divIcon({className: 'set-marker'})}).addTo(map);
+
+    // クリックイベントの取得
+    map.on("click",function(e){
+      marker.setLatLng(e.latlng);
+      $('#latitude').val(e.latlng.lat);
+      $('#longitude').val(e.latlng.lng);
+      console.log(e.latlng);
+
+
+      // 緯度の桁数を調整
+      let currentLat = e.latlng.lat;
+      currentLat = Math.floor((currentLat * 100000000 )) / 100000000;
+  
+      // 緯度をフォームに入力
+      let setLatitude = document.getElementById('setLatitude');
+      setLatitude.value = currentLat;
+
+      // 経度の桁数を調整
+      let currentLng = e.latlng.lng;
+      currentLng = Math.floor((currentLng * 100000000 )) / 100000000;
+
+      // 経度をフォームに入力
+      let setLongitude = document.getElementById('setLongitude');
+      setLongitude.value = currentLng;
+    });
+
+
