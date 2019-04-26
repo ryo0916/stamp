@@ -1,0 +1,27 @@
+extends layout
+
+block content
+
+  h2 #{title}
+
+  div(id="search")
+    form(action="/find/gnavi" method="get")
+      input(type="text" name="freeword")
+      button(type="submit") 検索
+  div(id="mapid")
+
+  section
+    if rests == true
+      each rest, index in rests
+        p=index
+        p=rest
+
+  <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">
+  <img src="https://api.gnavi.co.jp/api/img/credit/api_90_35.gif" width="90" height="35" border="0" alt="グルメ情報検索サイト　ぐるなび">
+  </a>
+
+  script(type='text/javascript' src='../javascripts/findmap.js')
+
+
+    
+

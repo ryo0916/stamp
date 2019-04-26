@@ -65,8 +65,16 @@ a {
   background-color: #fff;
 }
 
+#search {
+  padding: 10px;
+  opacity: 1;
+  position: absolute;
+  z-index: 1;
+}
+
 #mapid {
   height: 600px;
+  z-index: 0;
 }
 
 .marker {
