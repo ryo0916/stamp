@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-let connection = require('../mysqlConnection');
-let URL = 'https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=47a62732f7d537f037481955d0cde58b&freeword=牛丼%20新宿'
+require('dotenv').config();
 
 router.get('/', function(req, res, next) {
   if(req.session.user_id) {
@@ -28,7 +27,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/gnavi', function(req, res, next) {
   let freeword = req.query.freeword;
-  const keyid = '';
+  const keyid = process.env.GRUNAVI_KEY;
   const hitnum = '30';
   let url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${keyid}&hit_per_page=${hitnum}&freeword=`;
   url += encodeURIComponent(freeword);
@@ -39,7 +38,7 @@ router.get('/gnavi', function(req, res, next) {
     let nameArray;
     let array = [];
     restsArray = response.data.rest;
-    console.log(response.data);
+
     for (let key in restsArray) {
       nameArray = '';
       let title = restsArray[key].name;
@@ -58,48 +57,13 @@ router.get('/gnavi', function(req, res, next) {
 
   })
   .catch((err)=> {
-    console.log(err);
+    const errorWord = 'エラーが発生しました。別の単語で探してください。';
     console.log('errだよ');
+    res.render('find', {
+      error: errorWord
+    });
   })
 
 })
-
-/*
-  axios.get(url)
-  .then((res)=> {
-    let restsArray = [];
-    console.log(res.data.rest[1].name);
-    res.data.rest.map((rests)=> {
-      restsArray.push(rests);
-    });
-    // console.log(restsArray);
-
-    if (restsArray !== undefined){
-      res.render('find', {
-        rests: restsArray
-      });
-    } else {
-      res.render('find');
-    }
-    
-  })
-  .catch((err)=> {
-    console.log(err.response);
-    console.log('errだよ');
-  })
-
-  //////////////////////////////////
-
-    axios.get(url)
-  .then((res)=> {
-    console.log(res.data.rest[1].name);
-  })
-  .catch((err)=> {
-    console.log(err.response.data);
-    console.log('errだよ');
-  })
-  res.render('find');
-  console.log('終了');
-*/
 
 module.exports = router;

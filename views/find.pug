@@ -17,6 +17,9 @@ block content
         p=rest.area
         p=rest.url
         p=rest.category
+  section
+    if error
+      p=error
 
   <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">
   <img src="https://api.gnavi.co.jp/api/img/credit/api_90_35.gif" width="90" height="35" border="0" alt="グルメ情報検索サイト　ぐるなび">
@@ -41,7 +44,7 @@ block content
     }
     
     // 地図をセット
-    let map = L.map('mapid').setView([getLat(list), getLng(list)],14);
+    let map = L.map('mapid').setView([getLat(list), getLng(list)],16);
     let osmUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
     const osmAttribute = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>';
     L.tileLayer(osmUrl,{
