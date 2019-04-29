@@ -11,17 +11,69 @@ block content
   div(id="mapid")
 
   section
-    if rests == true
+    if rests
       each rest, index in rests
-        p=index
-        p=rest
+        p=rest.title
+        p=rest.area
+        p=rest.url
+        p=rest.category
 
   <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">
   <img src="https://api.gnavi.co.jp/api/img/credit/api_90_35.gif" width="90" height="35" border="0" alt="グルメ情報検索サイト　ぐるなび">
   </a>
 
-  script(type='text/javascript' src='../javascripts/findmap.js')
+  script(type='text/javascript').
 
+    let list = [!{JSON.stringify(rests)}];
+    list = list[0];
+    console.log(list);
 
+    // 地図経度の中心位置を指定
+    let getLat = (list) => {
+      let setLat = list === undefined ? '35.689020' : list[0].latitude;
+      return setLat;
+    }
+
+    // 地図緯度の中心位置を指定
+    let getLng = (list) => {
+      let setLng = list === undefined ? '139.744860' : list[0].longitude;
+      return setLng;
+    }
+    
+    // 地図をセット
+    let map = L.map('mapid').setView([getLat(list), getLng(list)],14);
+    let osmUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+    const osmAttribute = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>';
+    L.tileLayer(osmUrl,{
+      attribution: osmAttribute,
+      maxZoom: 19,
+    }).addTo(map);
+    
+    // 拡大縮小のボタンの位置を右下に変更
+    map.zoomControl.setPosition('bottomright');
+  
+    // スケールバーを付加
+    L.control.scale({
+      imperial: false,
+      metric: true
+    }).addTo(map);
+
+    // 配置マーカーの宣言
+    let latitude = 0;
+    let longitude = 0;
+    let marker = L.marker([latitude, longitude]).addTo(map);
+
+    // 取得データをマーカーに
+    function index_marker(map, list) {
+      Object.keys(list).forEach(function(key) {
+          let marker = L.popup().setContent('<b>' + list[key].title + '</b>' + '<br> <a href="' + list[key].url + '" target="_blank" rel="noopener"> ぐるなび </a>');
+          L.marker([list[key].latitude, list[key].longitude],{icon: L.divIcon({className: 'marker'})},{title: list[key].title}).bindPopup(marker).addTo(map);
+      });
+    };
+
+    if (list) {
+      index_marker(map, list);
+    }
+    
     
 

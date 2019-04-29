@@ -28,20 +28,40 @@ router.get('/', function(req, res, next) {
 
 router.get('/gnavi', function(req, res, next) {
   let freeword = req.query.freeword;
-  const keyid = 'null';
-  let url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${keyid}&freeword=`;
+  const keyid = '';
+  const hitnum = '30';
+  let url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${keyid}&hit_per_page=${hitnum}&freeword=`;
   url += encodeURIComponent(freeword);
 
   axios.get(url)
-  .then((res)=> {
-    console.log(res.data.rest[1].name);
+  .then((response)=> {
+    let restsArray = [];
+    let nameArray;
+    let array = [];
+    restsArray = response.data.rest;
+    console.log(response.data);
+    for (let key in restsArray) {
+      nameArray = '';
+      let title = restsArray[key].name;
+      let latitude = restsArray[key].latitude;
+      let longitude = restsArray[key].longitude;
+      let url = restsArray[key].url;
+      let area = restsArray[key].code.areaname_s;
+      let category = restsArray[key].category;
+      nameArray = {title, latitude, longitude, url, area, category};
+      array.push(nameArray);
+    }
+    console.log(array);
+    res.render('find', {
+      rests: array
+    });
+
   })
   .catch((err)=> {
-    console.log(err.response.data);
+    console.log(err);
     console.log('errだよ');
   })
-  res.render('find');
-  console.log('終了');
+
 })
 
 /*
@@ -67,6 +87,19 @@ router.get('/gnavi', function(req, res, next) {
     console.log(err.response);
     console.log('errだよ');
   })
+
+  //////////////////////////////////
+
+    axios.get(url)
+  .then((res)=> {
+    console.log(res.data.rest[1].name);
+  })
+  .catch((err)=> {
+    console.log(err.response.data);
+    console.log('errだよ');
+  })
+  res.render('find');
+  console.log('終了');
 */
 
 module.exports = router;
