@@ -38,6 +38,7 @@ router.get('/gnavi', function(req, res, next) {
     let nameArray;
     let array = [];
     restsArray = response.data.rest;
+    console.log(restsArray[0].image_url.shop_image1);
 
     for (let key in restsArray) {
       nameArray = '';
@@ -45,25 +46,53 @@ router.get('/gnavi', function(req, res, next) {
       let latitude = restsArray[key].latitude;
       let longitude = restsArray[key].longitude;
       let url = restsArray[key].url;
+      let image_url = restsArray[key].image_url.shop_image1;
       let area = restsArray[key].code.areaname_s;
       let category = restsArray[key].category;
-      nameArray = {title, latitude, longitude, url, area, category};
+      nameArray = {title, latitude, longitude, url, image_url, area, category};
       array.push(nameArray);
     }
     console.log(array);
-    res.render('find', {
-      rests: array
-    });
+    if (req.session.user_id) {
+      res.render('find', {
+        rests: array,
+        title: '地図作成',
+        newmap: '地図を作る',
+        viewmap: '地図を見る',
+        mypage: 'マイページ',
+        logout: 'ログアウト'
+      });
+    } else {
+      res.render('find', {
+        rests: array,
+        title: '地図作成',
+        register: '新規登録',
+        login: 'ログイン'
+      });
+    }
 
   })
   .catch((err)=> {
     const errorWord = 'エラーが発生しました。別の単語で探してください。';
     console.log('errだよ');
-    res.render('find', {
-      error: errorWord
-    });
+    if (req.session.user_id) {
+      res.render('find', {
+        error: errorWord,
+        title: '地図作成',
+        newmap: '地図を作る',
+        viewmap: '地図を見る',
+        mypage: 'マイページ',
+        logout: 'ログアウト'
+      });
+    } else {
+      res.render('find', {
+        error: errorWord,
+        title: '地図作成',
+        register: '新規登録',
+        login: 'ログイン'
+      })
+    }
   })
-
 })
 
 module.exports = router;

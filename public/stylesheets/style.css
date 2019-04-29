@@ -99,3 +99,26 @@ a {
   z-index: 20 !important;
 }
 
+.rest-wrap {
+  margin: 2em 3em;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.rest-item {
+  width: 30%;
+  margin: 1em;
+  padding: 1em;
+  color: #5d627b;
+  background: white;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.rest-item-img {
+  width: 93%;
+  padding-bottom: 1em;
+}
+
+.rest-item-title {
+  width: 93%;
+}

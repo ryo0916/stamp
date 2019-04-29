@@ -11,12 +11,22 @@ block content
   div(id="mapid")
 
   section
-    if rests
-      each rest, index in rests
-        p=rest.title
-        p=rest.area
-        p=rest.url
-        p=rest.category
+    div(class="rest-wrap")
+      if rests
+        each rest, index in rests
+          div(class="rest-item")
+            a(href=`${rest.url}`, target="_blank", rel="noopener")
+              img(src=`${rest.image_url}` class="rest-item-img")
+            div(class="")
+              h5(class="rest-item-title") 
+                a(href=`${rest.url}`, target="_blank", rel="noopener")=rest.title
+              p(class="")
+                img(src="/images/rest_place.svg" width="23" height="23" alt="stamp" class="") 
+                span=rest.area
+                br
+                img(src="/images/rest_genre.svg" width="23" height="23" alt="stamp" class="")
+                span=rest.category
+          
   section
     if error
       p=error
@@ -33,18 +43,24 @@ block content
 
     // 地図経度の中心位置を指定
     let getLat = (list) => {
-      let setLat = list === undefined ? '35.689020' : list[0].latitude;
+      let setLat = list === undefined ? '35.681236' : list[0].latitude;
       return setLat;
     }
 
     // 地図緯度の中心位置を指定
     let getLng = (list) => {
-      let setLng = list === undefined ? '139.744860' : list[0].longitude;
+      let setLng = list === undefined ? '139.767125' : list[0].longitude;
       return setLng;
+    }
+
+    // 地図のズームレベルを指定
+    let getProximity = (list) => {
+      let setPro = list === undefined ? 14 : 16;
+      return setPro;
     }
     
     // 地図をセット
-    let map = L.map('mapid').setView([getLat(list), getLng(list)],16);
+    let map = L.map('mapid').setView([getLat(list), getLng(list)], getProximity(list));
     let osmUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
     const osmAttribute = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>';
     L.tileLayer(osmUrl,{
