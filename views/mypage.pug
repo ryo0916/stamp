@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h2 #{title}
+  div(id='usercard')
+    div(class='userinfo')
+      img(src='/images/user.svg' width='100' height='100')
+      div(class='userinfo-inner')
+        h3 #{name}
+        h4 #{email}
+
+  div(class='delete-user')
+
+  script(type='text/javascript').
+    
+  

@@ -1,10 +1,14 @@
 body {
-  padding: 40px;
+  padding: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: brown;
+}
+
+.navbar-padding {
+  margin-bottom: 1em;
 }
 
 .navbar-inner {
@@ -121,4 +125,26 @@ a {
 
 .rest-item-title {
   width: 93%;
+}
+
+#logout {
+  padding-top: 1em;
+}
+
+#usercard {
+  padding: 2em;
+}
+
+.userinfo {
+  border: 1px solid #aaa;
+  padding: 1em;
+  display: flex;
+  width: 22em;
+  height: 10em;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.userinfo-inner {
+  padding: 1em;
 }

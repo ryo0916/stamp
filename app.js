@@ -16,6 +16,7 @@ const newmap = require('./routes/newmap');
 const viewmap = require('./routes/viewmap');
 const editmap = require('./routes/editmap');
 const find = require('./routes/find');
+const mypage = require('./routes/mypage');
 
 const app = express();
 
@@ -46,6 +47,7 @@ app.use('/newmap', newmap);
 app.use('/viewmap', viewmap);
 app.use('/editmap', editmap);
 app.use('/find', find);
+app.use('/mypage', mypage);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
