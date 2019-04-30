@@ -1,0 +1,108 @@
+extends layout
+
+block content
+
+  h2 #{title}
+
+  section
+    if error
+      p=error
+
+  div(id="search")
+    form(action="/find/gnavi" method="get")
+      input(type="text" name="freeword")
+      button(type="submit") 検索
+  div(id="mapid")
+
+  section
+    div(class="rest-wrap")
+      if rests
+        each rest, index in rests
+          div(class="rest-item")
+            a(href=`${rest.url}`, target="_blank", rel="noopener")
+              img(src=`${rest.image_url}` class="rest-item-img")
+            div(class="")
+              h5(class="rest-item-title") 
+                a(href=`${rest.url}` target="_blank" rel="noopener")=rest.title
+              p(class="")
+                a(href="#" onclick=`getPlace(map, ${rest.latitude}, ${rest.longitude})`)
+                  img(src="/images/rest_place.svg" width="23" height="23" alt="stamp" class="") 
+                  span=rest.area
+                br
+                img(src="/images/rest_genre.svg" width="23" height="23" alt="stamp" class="")
+                span=rest.category
+
+  <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">
+  <img src="https://api.gnavi.co.jp/api/img/credit/api_90_35.gif" width="90" height="35" border="0" alt="グルメ情報検索サイト　ぐるなび">
+  </a>
+
+  script(type='text/javascript').
+
+    let list = [!{JSON.stringify(rests)}];
+    list = list[0];
+    console.log(list);
+
+    // 地図経度の中心位置を指定
+    let getLat = (list) => {
+      let setLat = list === undefined ? '35.681236' : list[0].latitude;
+      return setLat;
+    }
+
+    // 地図緯度の中心位置を指定
+    let getLng = (list) => {
+      let setLng = list === undefined ? '139.767125' : list[0].longitude;
+      return setLng;
+    }
+
+    // 地図のズームレベルを指定
+    let getProximity = (list) => {
+      let setPro = list === undefined ? 14 : 16;
+      return setPro;
+    }
+    
+    // 地図をセット
+    let map = L.map('mapid').setView([getLat(list), getLng(list)], getProximity(list));
+    let osmUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+    const osmAttribute = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>';
+    L.tileLayer(osmUrl,{
+      attribution: osmAttribute,
+      maxZoom: 19,
+    }).addTo(map);
+    
+    // 拡大縮小のボタンの位置を右下に変更
+    map.zoomControl.setPosition('bottomright');
+  
+    // スケールバーを付加
+    L.control.scale({
+      imperial: false,
+      metric: true
+    }).addTo(map);
+
+    // 配置マーカーの宣言
+    let latitude = 0;
+    let longitude = 0;
+    let marker = L.marker([latitude, longitude]).addTo(map);
+
+    // 取得データをマーカーに
+    function index_marker(map, list) {
+      Object.keys(list).forEach(function(key) {
+          let marker = L.popup().setContent('<b>' + list[key].title + '</b>' + '<br> <a href="' + list[key].url + '" target="_blank" rel="noopener"> ぐるなび </a>');
+          L.marker([list[key].latitude, list[key].longitude],{icon: L.divIcon({className: 'marker'})},{title: list[key].title}).bindPopup(marker).addTo(map);
+      });
+    };
+
+    // 取得データが無ければ実行しない
+    if (list) {
+      index_marker(map, list);
+    }
+
+    // クリックした店の場所に移動
+    const getPlace = (map, latitude, longitude) => {
+      map.setView([latitude,longitude],17);
+      console.log(latitude + ' ' + longitude);
+    }
+
+    
+    
+    
+
