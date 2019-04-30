@@ -34,7 +34,6 @@ router.post('/', function(req, res, next) {
   let createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
   let query = 'INSERT INTO comments (comment, created_at) VALUES ("' + comment + '", ' + '"' + createdAt + '")';
   connection.query(query, function(err, rows) {
-    console.log(query);
     res.redirect('/comment');
   });
 });

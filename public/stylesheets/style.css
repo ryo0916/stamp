@@ -19,7 +19,10 @@ a {
   color: black;
   font-weight: 500;
   font-size: 1vw;
+}
 
+.navbar-left a:hover {
+  color: black;
 }
 
 .navbar-left {
@@ -30,7 +33,7 @@ a {
 }
 
 .logo-right {
-  margin-right: 0.8em;
+  margin-right: 0.4em;
   margin-top: 0.4em;
 }
 
@@ -42,6 +45,14 @@ a {
 
 .navbar-menu {
   margin-right: 0.8em;
+  color: #858782;
+  font-weight: bold;
+}
+
+.navbar-right a:hover {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
 }
 
 .top-catchword {
@@ -147,4 +158,39 @@ a {
 
 .userinfo-inner {
   padding: 1em;
+}
+
+.comment-form{
+  padding: 1em;
+}
+
+#comment-input {
+  width: 20em;
+}
+
+.comment-button {
+  border-radius: 5px;
+  background-color: green;
+  padding: 0.25em;
+  margin: 0.5em;
+  text-align: center;
+  color: white;
+}
+
+.comment-form ul {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+}
+
+.comment-li {
+  border-bottom: #5d627b solid 1px
+}
+
+.comment-form li {
+  padding-top: 0.5em;
+}
+
+.comment-top {
+  padding-bottom: 1em;
 }
