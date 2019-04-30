@@ -35,13 +35,13 @@ router.get('/gnavi', function(req, res, next) {
   axios.get(url)
   .then((response)=> {
     let restsArray = [];
-    let nameArray;
+    let objectArray;
     let array = [];
     restsArray = response.data.rest;
     console.log(restsArray[0].image_url.shop_image1);
 
     for (let key in restsArray) {
-      nameArray = '';
+      objectArray = '';
       let title = restsArray[key].name;
       let latitude = restsArray[key].latitude;
       let longitude = restsArray[key].longitude;
@@ -49,14 +49,13 @@ router.get('/gnavi', function(req, res, next) {
       let image_url = restsArray[key].image_url.shop_image1;
       let area = restsArray[key].code.areaname_s;
       let category = restsArray[key].category;
-      nameArray = {title, latitude, longitude, url, image_url, area, category};
-      array.push(nameArray);
+      objectArray = {title, latitude, longitude, url, image_url, area, category};
+      array.push(objectArray);
     }
-    console.log(array);
     if (req.session.user_id) {
       res.render('find', {
         rests: array,
-        title: '地図作成',
+        title: 'レストラン検索',
         newmap: '地図を作る',
         viewmap: '地図を見る',
         mypage: 'マイページ',
@@ -65,7 +64,7 @@ router.get('/gnavi', function(req, res, next) {
     } else {
       res.render('find', {
         rests: array,
-        title: '地図作成',
+        title: 'レストラン検索',
         register: '新規登録',
         login: 'ログイン'
       });
@@ -78,7 +77,7 @@ router.get('/gnavi', function(req, res, next) {
     if (req.session.user_id) {
       res.render('find', {
         error: errorWord,
-        title: '地図作成',
+        title: 'レストラン検索',
         newmap: '地図を作る',
         viewmap: '地図を見る',
         mypage: 'マイページ',
@@ -87,7 +86,7 @@ router.get('/gnavi', function(req, res, next) {
     } else {
       res.render('find', {
         error: errorWord,
-        title: '地図作成',
+        title: 'レストラン検索',
         register: '新規登録',
         login: 'ログイン'
       })

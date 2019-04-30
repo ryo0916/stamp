@@ -4,6 +4,10 @@ block content
 
   h2 #{title}
 
+  section
+    if error
+      p=error
+
   div(id="search")
     form(action="/find/gnavi" method="get")
       input(type="text" name="freeword")
@@ -19,17 +23,14 @@ block content
               img(src=`${rest.image_url}` class="rest-item-img")
             div(class="")
               h5(class="rest-item-title") 
-                a(href=`${rest.url}`, target="_blank", rel="noopener")=rest.title
+                a(href=`${rest.url}` target="_blank" rel="noopener")=rest.title
               p(class="")
-                img(src="/images/rest_place.svg" width="23" height="23" alt="stamp" class="") 
-                span=rest.area
+                a(href="#" onclick=`getPlace(map, ${rest.latitude}, ${rest.longitude})`)
+                  img(src="/images/rest_place.svg" width="23" height="23" alt="stamp" class="") 
+                  span=rest.area
                 br
                 img(src="/images/rest_genre.svg" width="23" height="23" alt="stamp" class="")
                 span=rest.category
-          
-  section
-    if error
-      p=error
 
   <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">
   <img src="https://api.gnavi.co.jp/api/img/credit/api_90_35.gif" width="90" height="35" border="0" alt="グルメ情報検索サイト　ぐるなび">
@@ -90,9 +91,18 @@ block content
       });
     };
 
+    // 取得データが無ければ実行しない
     if (list) {
       index_marker(map, list);
     }
+
+    // クリックした店の場所に移動
+    const getPlace = (map, latitude, longitude) => {
+      map.setView([latitude,longitude],17);
+      console.log(latitude + ' ' + longitude);
+    }
+
+    
     
     
 
