@@ -123,7 +123,7 @@ a {
   border-radius: 10px;
   border: 3px solid #fdfdfd;
   box-shadow: 0 1px 4px rgba(0,0,0,0.8);
-  background-color: #00D684;
+  background-color: #0000cd;
   z-index: 20 !important;
 }
 
@@ -215,4 +215,43 @@ a {
 
 .grunavi-logo {
   margin: 1em;
+}
+
+.maplist {
+  list-style: none;
+  padding: 0;
+  margin-top: 1em;
+}
+
+.maplist li {
+  padding-left: 1em;
+  margin-bottom: 0.5em;
+}
+
+.createmarker {
+  padding-left: 1em;
+  opacity: 1;
+  position: absolute;
+  z-index: 1;
+}
+
+.editmarker {
+  display: inline-flex;
+  padding-left: 1em;
+  opacity: 1;
+  position: absolute;
+  z-index: 1;
+}
+
+.editmarker-delete {
+  padding-top: 0.1em;
+}
+
+.editmarker-delete-button {
+  border-radius: 5px;
+  background-color: red;
+  padding: 0.25em;
+  margin: 0.45em 0;
+  text-align: center;
+  color: white;
 }
