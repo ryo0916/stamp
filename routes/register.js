@@ -25,6 +25,7 @@ router.post('/', function(req, res, next) {
   connection.query(checkEmailQuery, function(err, email) {
     // メルアド重複
     let emailExists = email.length;
+    console.log(email);
     if (emailExists) {
       console.log("メール重複");
       res.render('register', {
