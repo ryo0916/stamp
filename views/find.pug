@@ -2,7 +2,8 @@ extends layout
 
 block content
 
-  h2 #{title}
+  h2(class='heading-wrapper')
+    span #{title}
 
   section
     if error
@@ -11,7 +12,7 @@ block content
   div(id="search")
     form(action="/find/gnavi" method="get")
       input(type="text" name="freeword")
-      button(type="submit") 検索
+      button(type="submit" class="button") 検索
   div(id="mapid")
 
   section
@@ -22,19 +23,19 @@ block content
             a(href=`${rest.url}`, target="_blank", rel="noopener")
               img(src=`${rest.image_url}` class="rest-item-img")
             div(class="")
-              h5(class="rest-item-title") 
-                a(href=`${rest.url}` target="_blank" rel="noopener")=rest.title
-              p(class="")
+              h5(class="rest-item-title-wrap") 
+                a(href=`${rest.url}` target="_blank" rel="noopener" class="rest-item-title")=rest.title
+              p(class="rest-item-info")
                 a(href="#" onclick=`getPlace(map, ${rest.latitude}, ${rest.longitude})`)
-                  img(src="/images/rest_place.svg" width="23" height="23" alt="stamp" class="") 
-                  span=rest.area
+                  img(src="/images/rest_place.svg" width="23" height="23" alt="stamp" class="rest-item-info-logo") 
+                  span(class="rest-item-info-word")=rest.area
                 br
-                img(src="/images/rest_genre.svg" width="23" height="23" alt="stamp" class="")
+                img(src="/images/rest_genre.svg" width="23" height="23" alt="stamp" class="rest-item-info-logo")
                 span=rest.category
-
-  <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">
-  <img src="https://api.gnavi.co.jp/api/img/credit/api_90_35.gif" width="90" height="35" border="0" alt="グルメ情報検索サイト　ぐるなび">
-  </a>
+  div(class='grunavi-logo')
+    <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">
+    <img src="https://api.gnavi.co.jp/api/img/credit/api_90_35.gif" width="90" height="35" border="0" alt="グルメ情報検索サイト　ぐるなび">
+    </a>
 
   script(type='text/javascript').
 

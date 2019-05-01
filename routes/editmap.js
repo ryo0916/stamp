@@ -11,7 +11,7 @@ router.get('/:map_id', function(req, res, next) {
     connection.query(getMarkerQuery, function(err, marker) {
       if (req.session.user_id) {
         res.render('editmap', {
-          title: '地図作成',
+          title: '地図ページ',
           newmap: '地図を作る',
           viewmap: '地図を見る',
           mypage: 'マイページ',
@@ -25,7 +25,7 @@ router.get('/:map_id', function(req, res, next) {
         });
       } else {
         res.render('index', {
-          title: '地図作成',
+          title: '地図ページ',
           register: '新規登録',
           login: 'ログイン'
         });

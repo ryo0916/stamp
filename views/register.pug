@@ -1,21 +1,18 @@
 extends layout
 
 block content
-  div
-    h2 #[span.heading #{title} ]
+  div(class="request-form")
     form(action="/register" method="post")
-      span ユーザー名 : #[input(type="text" name="user_name" required)]
+      input(type="text" name="user_name" required placeholder="User Name")
       br
+      input(type="email" name="email" required placeholder="Email")
       br
-      span Eメール : #[input(type="email" name="email" required)]
-      br
-      br
-      span パスワード : #[input(type="password" name="password" required)]
-      br
+      input(type="password" name="password" required placeholder="Password")
       br
       button(type="submit") 新規登録
-    if typeof emailExists !== 'undefined'
-      p= emailExists
+  if typeof emailExists !== 'undefined'
+    p(class="request-no-match")= emailExists
+  div(class="login-notyet")
     if login
       span ログインされる方は、#[a(href="../../login") こちら]から
     

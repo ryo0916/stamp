@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
     res.render('login', {
       title: 'ログイン',
       register: '新規登録',
+      login: 'ログイン',
     });
   }
 });
@@ -25,7 +26,9 @@ router.post('/', function(req, res, next) {
     } else {
       res.render('login', {
         title: 'ログイン',
-        noUser: 'メールアドレスとパスワードが一致するユーザーはいません'
+        register: '新規登録',
+        login: 'ログイン',
+        noUser: 'ユーザーが見つかりません'
       });
     }
   });

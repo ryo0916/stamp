@@ -2,19 +2,20 @@ extends layout
 
 block content
 
-  h2 地図作成ページ
+  h2(class='heading-wrapper')
+    span #{title}
+
+  div(id="newmap")
+    div(id="newmap-describe-top") 地図作成の手順
+    div(id="newmap-describe") 1. 地図をクリックして、中心点を決める #[br]2. 地図名を記入して作成ボタンを押す
+    form(action="/newMap" method="post")
+      
+      input(type="text" name="latitude" id="setLatitude" style="display: none;")
+      input(type="text" name="longitude" id="setLongitude" style="display: none;")
+      span #[input(type="text" name="mapName" retuired)]
+      button(class="button" type="submit") 作成
 
   div(id="mapid")
-
-  h4 地図作成の手順
-  p 1. 地図をクリックして、中心点を決める #[br]2. 地図名を記入して作成ボタンを押す
-  form(action="/newMap" method="post")
-    
-    input(type="text" name="latitude" id="setLatitude" style="display: none;")
-    input(type="text" name="longitude" id="setLongitude" style="display: none;")
-    span 地図名: #[input(type="text" name="mapName" retuired)]
-    button(type="submit") 作成
-
 
   script(type='text/javascript').
     L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.4.0/dist/images/';

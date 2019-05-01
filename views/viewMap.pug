@@ -2,11 +2,15 @@ extends layout
 
 block content
 
-  h2 地図閲覧ページ
+  h2(class='heading-wrapper')
+    span #{title}
 
-  p #{message}
+  section
+    if message
+      p #{message}
 
-  ul
-    each map in mapList
-      li: a(href='../editmap/' + map.map_id) #{map['map_name']}
+  ul(class="maplist")
+    if mapList
+      each map in mapList
+        li: a(href='../editmap/' + map.map_id)  #{map['map_name']}
   

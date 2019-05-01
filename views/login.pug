@@ -1,17 +1,15 @@
 extends layout
 
 block content
-  div
-    h2 #[span.heading #{title} ]
+  div(class="request-form")
     form(action="/login" method="post")
-      span Eメール : #[input(type="email" name="email" required)]
+      input(type="email" name="email" required placeholder="Email")
       br
-      br
-      span パスワード : #[input(type="password" name="password" required)]
-      br
+      input(type="password" name="password" required placeholder="Password")
       br
       button(type="submit") ログイン
-      if register
-        span まだ登録されていない方は、#[a(href="../../register") こちら]から
-    if typeof noUser !== 'undefined'
-      p= noUser
+  if typeof noUser !== 'undefined'
+    p(class="request-no-match")= noUser
+  div(class="register-notyet")
+    if register
+      span まだ登録されていない方は、#[a(href="../../register") こちら]から

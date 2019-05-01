@@ -2,34 +2,36 @@ extends layout
 
 block content
 
-  h2 マーカー編集ページ
-  p マップ名: #{map_name}, Map-ID: #{map_id}
+  h2(class='heading-wrapper')
+    span #{title}
+  p マップ名: #{map_name}
 
-  div(id="mapid")
-
-  div(id="createmarker" style="display: none;")
+  div(id="createmarker" class="createmarker" style="display: none;")
     form(action="/editmap/" method="post")
       input(type="text" name="latitude" id="setLatitude" style="display: none;")
       input(type="text" name="longitude" id="setLongitude" style="display: none;")
       input(type="number" name="map_id" value=map_id style="display:none;")
       input(type="text" name="markerTitle" placeholder="タイトル" required)
       input(type="text" name="comment" placeholder="コメント(任意)")
-      button(type="submit") 作成
+      button(class="button" type="submit") 作成
   
-  div(id="editmarker" style="display: none;")
+  div(id="editmarker" class="editmarker" style="display: none;")
     form(action="/editmap/?_method=put" method="post")
       input(type="number" name="map_id" value=map_id style="display:none;")
       input(type="text" name="currentLat" id="currentLat" style="display: none;")
       input(type="text" name="currentLng" id="currentLng" style="display: none;")
       input(type="text" name="markerTitle" id="updateTitle" placeholder="タイトル" required)
       input(type="text" name="comment" id="updateComment" placeholder="コメント(任意)")
-      button(type="submit") 更新
+      button(class="button" type="submit") 更新
   
-    form(action="/editmap/?_method=delete" method="post")
-      input(type="number" name="map_id" value=map_id style="display:none;")
-      input(type="text" name="deleteLat" id="deleteLat" style="display: none;")
-      input(type="text" name="deleteLng" id="deleteLng" style="display: none;")
-      button(type="submit") 削除
+    div(class="editmarker-delete")
+      form(action="/editmap/?_method=delete" method="post")
+        input(type="number" name="map_id" value=map_id style="display:none;")
+        input(type="text" name="deleteLat" id="deleteLat" style="display: none;")
+        input(type="text" name="deleteLng" id="deleteLng" style="display: none;")
+        button(class="editmarker-delete-button" type="submit") 削除
+
+  div(id="mapid")
 
   script(type='text/javascript').
     
