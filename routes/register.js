@@ -24,7 +24,10 @@ router.post('/', function(req, res, next) {
   let registerQuery = 'INSERT INTO users (name, email, password, created_at) VALUES ("' + userName + '", ' + '"' + email + '", ' + '"' + password + '", ' + '"' + createdAt + '")';
   connection.query(checkEmailQuery, function(err, email) {
     // メルアド重複
-    let emailExists = email.length;
+    let emailExists;
+    if (email) {
+      emailExists = email.length;
+    };
     console.log(email);
     if (emailExists) {
       console.log("メール重複");
