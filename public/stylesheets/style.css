@@ -147,8 +147,30 @@ a {
   padding-bottom: 1em;
 }
 
-.rest-item-title {
+.rest-item-title-wrap {
   width: 93%;
+}
+
+.rest-item-title {
+  color: black;
+}
+
+.rest-item-title:hover {
+  color: #1e90ff;
+  text-decoration: none;
+}
+
+.rest-item-info {
+  padding: 0.2em 0 0 0;
+}
+
+.rest-item-info-logo {
+  margin-right: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+.rest-item-info-word {
+  color: #5d627b;
 }
 
 #logout {
