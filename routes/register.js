@@ -9,7 +9,8 @@ router.get('/', function(req, res, next) {
   } else {
     res.render('register', {
       title: '新規登録',
-      login: 'ログイン'
+      login: 'ログイン',
+      register: '新規登録',
     });
   }
 });
@@ -22,14 +23,18 @@ router.post('/', function(req, res, next) {
   let checkEmailQuery = 'SELECT * FROM users WHERE email = "' + email + '" LIMIT 1';
   let registerQuery = 'INSERT INTO users (name, email, password, created_at) VALUES ("' + userName + '", ' + '"' + email + '", ' + '"' + password + '", ' + '"' + createdAt + '")';
   connection.query(checkEmailQuery, function(err, email) {
+    // メルアド重複
     let emailExists = email.length;
     if (emailExists) {
       console.log("メール重複");
       res.render('register', {
         title: '新規登録',
+        login: 'ログイン',
+        register: '新規登録',
         emailExists: 'メールアドレスは既に登録されています'
       });
     } else {
+      // 登録成功
       connection.query(registerQuery, function(err, rows) {
         console.log(registerQuery);
         res.redirect('/login');
