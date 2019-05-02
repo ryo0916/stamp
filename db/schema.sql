@@ -1,3 +1,6 @@
+CREATE DATABASE stamp;
+USE stamp;
+
 CREATE TABLE users (
   user_id INT(11) NOT NULL AUTO_INCREMENT,
   name  VARCHAR(255) NOT NULL,
