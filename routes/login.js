@@ -19,9 +19,8 @@ router.post('/', function(req, res, next) {
   let password = req.body.password;
   let query = 'SELECT user_id FROM users WHERE email = "' + email + '" AND password = "' + password + '" LIMIT 1';
   connection.query(query, function(err, rows) {
-    let userId = rows.length? rows[0].user_id: false;
-    if (userId) {
-      req.session.user_id = userId;
+    if (rows[0]) {
+      req.session.user_id = rows[0].user_id;
       res.redirect('/');
     } else {
       res.render('login', {
