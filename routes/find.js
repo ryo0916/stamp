@@ -6,7 +6,7 @@ require('dotenv').config();
 router.get('/', function(req, res, next) {
   if(req.session.user_id) {
     res.render('find', {
-      title: 'レストラン検索',
+      title: 'お店検索',
       newmap: '地図を作る',
       viewmap: '地図を見る',
       mypage: 'マイページ',
@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
     });
   } else {
     res.render('find', {
-      title: 'レストラン検索',
+      title: 'お店検索',
       register: '新規登録',
       login: 'ログイン',
     })
@@ -55,7 +55,7 @@ router.get('/gnavi', function(req, res, next) {
     if (req.session.user_id) {
       res.render('find', {
         rests: array,
-        title: 'レストラン検索',
+        title: 'お店検索',
         newmap: '地図を作る',
         viewmap: '地図を見る',
         mypage: 'マイページ',
@@ -64,7 +64,7 @@ router.get('/gnavi', function(req, res, next) {
     } else {
       res.render('find', {
         rests: array,
-        title: 'レストラン検索',
+        title: 'お店検索',
         register: '新規登録',
         login: 'ログイン'
       });
@@ -77,7 +77,7 @@ router.get('/gnavi', function(req, res, next) {
     if (req.session.user_id) {
       res.render('find', {
         error: errorWord,
-        title: 'レストラン検索',
+        title: 'お店検索',
         newmap: '地図を作る',
         viewmap: '地図を見る',
         mypage: 'マイページ',
@@ -86,7 +86,7 @@ router.get('/gnavi', function(req, res, next) {
     } else {
       res.render('find', {
         error: errorWord,
-        title: 'レストラン検索',
+        title: 'お店検索',
         register: '新規登録',
         login: 'ログイン'
       })
