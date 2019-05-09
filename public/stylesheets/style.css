@@ -329,6 +329,7 @@ a {
 .request-no-match {
   color: red;
   font-weight: bold;
+  text-align: center;
 }
 
 .login-notyet {

@@ -10,6 +10,8 @@ block content
       button(type="submit") ログイン
   if typeof noUser !== 'undefined'
     p(class="request-no-match")= noUser
+  if typeof wrongPassword !== 'undefined'
+    p(class="request-no-match")= wrongPassword
   div(class="register-notyet")
     if register
       span 登録は、#[a(href="../../register") こちら]から
