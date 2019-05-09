@@ -4,9 +4,9 @@ let connection = require('../mysqlConnection');
 
 router.get('/', function(req, res, next) {
   let userId = req.session.user_id;
-  let viewMapQuery = 'SELECT * FROM maps WHERE user_id =' + userId;
+  let viewMapQuery = 'SELECT * FROM maps WHERE user_id = ?'; // ?でSQLインジェクション対策
 
-  connection.query(viewMapQuery, function(err, map) {
+  connection.query(viewMapQuery, [userId], function(err, map) { // 第二引数を?に代入
     if (req.session.user_id) {
       res.render('viewmap', {
         title: '地図一覧',
