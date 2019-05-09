@@ -280,6 +280,10 @@ a {
 
 .request-form {
   padding: 1em;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 .request-form input {
@@ -318,7 +322,8 @@ a {
 }
 
 .register-notyet {
-  margin: 1em 0 1em 0;
+  margin: 0 0 1em 0;
+  text-align: center;
 }
 
 .request-no-match {
@@ -327,5 +332,6 @@ a {
 }
 
 .login-notyet {
-  margin: 1em 0 1em 0;
+  margin: 0 0 1em 0;
+  text-align: center;
 }
