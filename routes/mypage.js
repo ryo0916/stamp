@@ -4,8 +4,8 @@ const moment = require('moment');
 const connection = require('../mysqlConnection');
 
 router.get('/', function(req, res, next) {
-  let getMyInfoQuery = 'SELECT * FROM users WHERE user_id =' + req.session.user_id;
-  connection.query(getMyInfoQuery, function(err, info) {
+  let getMyInfoQuery = 'SELECT * FROM users WHERE user_id =?'; // ?でSQLインジェクション対策
+  connection.query(getMyInfoQuery, [req.session.user_id], function(err, info) {
     if(req.session.user_id) {
       res.render('mypage', {
         title: 'マイページ(β)',

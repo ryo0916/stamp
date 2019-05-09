@@ -18,11 +18,12 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   let userName = req.body.user_name;
   let email = req.body.email;
+  let email_register = email; // registerQuery代入用
   let password = req.body.password;
   let createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
-  let checkEmailQuery = 'SELECT * FROM users WHERE email = "' + email + '" LIMIT 1';
-  let registerQuery = 'INSERT INTO users (name, email, password, created_at) VALUES ("' + userName + '", ' + '"' + email + '", ' + '"' + password + '", ' + '"' + createdAt + '")';
-  connection.query(checkEmailQuery, function(err, email) {
+  let checkEmailQuery = 'SELECT * FROM users WHERE email = ? LIMIT 1'; // ?でSQLインジェクション対策
+  let registerQuery = 'INSERT INTO users (name, email, password, created_at) VALUES (?, ?, ?, ?)'; // ?でSQLインジェクション対策
+  connection.query(checkEmailQuery, [email], function(err, email) { // ?に第二引数を代入
     // メルアド重複
     let emailExists;
     if (email) {
@@ -39,9 +40,9 @@ router.post('/', function(req, res, next) {
       });
     } else {
       // 登録成功
-      connection.query(registerQuery, function(err, rows) {
-        console.log(registerQuery);
+      connection.query(registerQuery, [userName, email_register, password, createdAt], function(err, rows) { // ?に第二引数を代入
         res.redirect('/login');
+        console.log(err);
       });
     }
   });

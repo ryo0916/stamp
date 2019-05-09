@@ -28,10 +28,10 @@ router.post('/', function(req, res, next) {
   let mapName = req.body.mapName;
   let createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
   let user_id = req.session.user_id;
-  let query = 'INSERT INTO maps (map_name, latitude, longitude, created_at, user_id) VALUES ("' + mapName + '", ' + '"' + latitude + '", ' + '"' + longitude + '", ' + '"' + createdAt + '", ' + '"' + user_id + '")';
-  let getMapidQuery = 'SELECT * FROM maps WHERE created_at = "' + createdAt + '" LIMIT 1';
-  connection.query(query, function(err, rows){
-    connection.query(getMapidQuery, function(err, rows){
+  let query = 'INSERT INTO maps (map_name, latitude, longitude, created_at, user_id) VALUES (?, ?, ?, ?, ?)'; // ?でSQLインジェクション対策
+  let getMapidQuery = 'SELECT * FROM maps WHERE created_at = ? LIMIT 1'; // ?でSQLインジェクション対策
+  connection.query(query, [mapName, latitude, longitude, createdAt, user_id], function(err, rows){ // ?に第二引数を代入
+    connection.query(getMapidQuery, [createdAt], function(err, rows){ // ?に第二引数を代入
       const map_id = rows[0].map_id;
       res.redirect('editmap/' + map_id);
     })
