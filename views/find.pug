@@ -22,7 +22,7 @@ block content
           div(class="rest-item")
             a(href=`${rest.url}`, target="_blank", rel="noopener")
               img(src=`${rest.image_url}` class="rest-item-img")
-            div(class="")
+            div
               h5(class="rest-item-title-wrap") 
                 a(href=`${rest.url}` target="_blank" rel="noopener" class="rest-item-title")=rest.title
               p(class="rest-item-info")
@@ -32,16 +32,26 @@ block content
                 br
                 img(src="/images/rest_genre.svg" width="23" height="23" alt="stamp" class="rest-item-info-logo")
                 span=rest.category
+              if maps
+                div(class="addtomap")
+                  form(action="/find/" method="post")
+                    input(type="text" name="latitude" value=rest.latitude style="display: none;")
+                    input(type="text" name="longitude" value=rest.longitude style="display: none;")
+                    select(name="map_id")
+                      each map, index in maps
+                        option(name="map_id" value=map.map_id)=map.map_name
+                    input(type="text" name="markerTitle" value=rest.title style="display: none;")
+                    button(class="button" type="submit") 地図に追加
   div(class='grunavi-logo')
     <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">
     <img src="https://api.gnavi.co.jp/api/img/credit/api_90_35.gif" width="90" height="35" border="0" alt="グルメ情報検索サイト　ぐるなび">
     </a>
 
   script(type='text/javascript').
-
-    let list = [!{JSON.stringify(rests)}];
+    
+    let list;
+    list = [!{JSON.stringify(rests)}];
     list = list[0];
-    console.log(list);
 
     // 地図経度の中心位置を指定
     let getLat = (list) => {
