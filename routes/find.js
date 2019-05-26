@@ -3,7 +3,6 @@ const router = express.Router();
 const axios = require('axios');
 let moment = require('moment');
 let connection = require('../mysqlConnection');
-const sessionStorage = require('sessionstorage');
 require('dotenv').config();
 
 router.get('/', function(req, res, next) {
