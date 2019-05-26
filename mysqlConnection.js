@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+require('dotenv').config();
 
 // local用
 /*
@@ -14,7 +15,7 @@ const dbConfig = {
 const dbConfig = {
   host: 'us-cdbr-iron-east-02.cleardb.net',
   user: 'b62372516e3d30',
-  password: 'c83c432b',
+  password: process.env.DB_CONFIG_PASSWORD,
   database: 'heroku_9d81f307dfe298a'
 }
 
