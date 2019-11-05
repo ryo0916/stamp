@@ -56,6 +56,7 @@ block content
       // 地図の新しい名前の挿入フォーム
       let newMapName = document.createElement("input");
       newMapName.name = "newmapname";
+      newMapName.style.cssText = "width: 5em;" + "height: 1.25em;"
 
       // 地図のIDフォーム
       let mapIdForm = document.createElement("input");
@@ -67,7 +68,9 @@ block content
       let nameChangeButton = document.createElement("button");
       nameChangeButton.type = "submit";
       nameChangeButton.textContent = "更新する";
-
+      nameChangeButton.class = "newmapname-button"
+      nameChangeButton.style.cssText = "background-color: green;" + "height: 1.4em;" + "font-size: 1.4vw;" +
+      "border-radius: 8px;" + "margin: 0 0.25em;" + "padding-bottom: 0.1em" + "text-align: center;" + "color: white;"
       // 地図の名前とIDのフォームをノードに挿入
       mapNameForm.appendChild(newMapName);
       mapNameForm.appendChild(mapIdForm);

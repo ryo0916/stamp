@@ -375,3 +375,9 @@ a {
     1em 1em;
   background-repeat: no-repeat;
 }
+
+#newmapname {
+  display: inline-flex;
+  padding-left: 0.25em;
+  margin-bottom: 0.3em;
+}
