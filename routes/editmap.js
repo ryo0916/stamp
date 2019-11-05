@@ -72,4 +72,7 @@ router.delete('/', function(req, res, next) {
   });
 });
 
+// 地図名を更新する
+
+
 module.exports = router;

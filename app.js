@@ -6,7 +6,6 @@ const logger = require('morgan');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const domain = require('express-domain-middleware');
-const bcrypt = require('bcrypt');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
