@@ -1,0 +1,10 @@
+extends layout
+
+block content
+
+  h2(class='heading-wrapper')
+    span #{title}
+
+  section
+    if message
+      p #{message}
