@@ -73,6 +73,14 @@ router.delete('/', function(req, res, next) {
 });
 
 // 地図名を更新する
+router.put('/newmapname/', function(req, res, next) {
+  let map_id = req.body.currentMapId;
+  let newmapname = req.body.newmapname;
+  let newmapnameQuery = 'UPDATE maps SET map_name = ? WHERE map_id = ?';
+  connection.query(newmapnameQuery, [newmapname, map_id], function(err, rows) {
+    res.redirect('/editmap/' + map_id);
+  });
+});
 
 
 module.exports = router;

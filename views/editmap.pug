@@ -40,7 +40,7 @@ block content
 
     // URLから地図のIDを取得
     const url = location.pathname;
-    const currentMapId = url.match(/\/editmap\/+([0-9]{1,})/)[1];
+    const currentMapId = Number(url.match(/\/editmap\/+([0-9]{1,})/)[1]);
 
     // 地図の名前を変更する
     let wrapMapName = document.getElementById("wrap-mapname");
