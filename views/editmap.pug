@@ -71,14 +71,17 @@ block content
       nameChangeButton.class = "newmapname-button"
       nameChangeButton.style.cssText = "background-color: green;" + "height: 1.4em;" + "font-size: 1.4vw;" +
       "border-radius: 8px;" + "margin: 0 0.25em;" + "padding-bottom: 0.1em" + "text-align: center;" + "color: white;"
+
       // 地図の名前とIDのフォームをノードに挿入
       mapNameForm.appendChild(newMapName);
       mapNameForm.appendChild(mapIdForm);
       mapNameForm.appendChild(nameChangeButton);
       
+      // 地図名のノードを取得
       let mapname = document.getElementById("mapname");
       let mapnameNode = mapname.childNodes[1].id
 
+      // クリック初回のみ、地図名をフォームに切り替え
       if (mapnameNode === "mapnameCurrent") {
         mapname.appendChild(mapNameForm);
         mapname.removeChild(mapnameCurrent);
