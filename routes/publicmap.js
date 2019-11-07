@@ -50,7 +50,7 @@ router.get('/:map_id', function(req, res, next) {
             center_longitude: map[0].longitude,
             marker_list: marker,
 
-            message: 'この地図表示は作成中です。'
+            message: map[0].map_name
           });
         } else {
           res.render('publicmap', {
@@ -64,11 +64,11 @@ router.get('/:map_id', function(req, res, next) {
             center_longitude: map[0].longitude,
             marker_list: marker,
 
-            message: '地図表示は作成中です。'
+            message: map[0].map_name
           });
         };
       });
-    } else {
+    } else if (map[0].public === 0) {
       if (req.session.user_id) {
         res.render('publicmap', {
           title: '地図ページ',
@@ -85,11 +85,10 @@ router.get('/:map_id', function(req, res, next) {
           register: '新規登録',
           login: 'ログイン',
 
-          message: 'この地図は公開されておりません'
+          message: 'この地図は公開されていません'
         });
       };
     }
-
   });
 });
 
