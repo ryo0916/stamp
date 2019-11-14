@@ -14,12 +14,10 @@ block content
       input(type="number" name="map_id" value=map_id style="display:none;")
       if public===0
         input(type="number" name="public" value=1 style="display:none;")
-      if public===1
-        input(type="number" name="public" value=0 style="display:none;")
-      if public===0
         span(class="public-show") 外部: 非公開
         button(class="public-show-button" type="submit") 公開にする
-      else
+      else if public===1
+        input(type="number" name="public" value=0 style="display:none;")
         span(class="public-show") 外部: 公開
         button(class="public-unshow-button" type="submit") 非公開にする
 
