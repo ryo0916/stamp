@@ -4,7 +4,22 @@ block content
 
   h2(class='heading-wrapper')
     span #{title}
-  p マップ名: #{map_name}
+  div マップ名: 
+    span(id="wrap-mapname") 
+      span(id="mapname") 
+        span(id="mapnameCurrent") #{map_name}
+  
+  div
+    form(action="/editmap/public/?_method=put" method="post")
+      input(type="number" name="map_id" value=map_id style="display:none;")
+      if public===0
+        input(type="number" name="public" value=1 style="display:none;")
+        span(class="public-show") 外部: 非公開
+        button(class="public-show-button" type="submit") 公開にする
+      else if public===1
+        input(type="number" name="public" value=0 style="display:none;")
+        span(class="public-show") 外部: 公開
+        button(class="public-unshow-button" type="submit") 非公開にする
 
   div(id="createmarker" class="createmarker" style="display: none;")
     form(action="/editmap/" method="post")
@@ -34,6 +49,56 @@ block content
   div(id="mapid")
 
   script(type='text/javascript').
+
+    // URLから地図のIDを取得
+    const url = location.pathname;
+    const currentMapId = Number(url.match(/\/editmap\/+([0-9]{1,})/)[1]);
+
+    // 地図の名前を変更する
+    let wrapMapName = document.getElementById("wrap-mapname");
+    wrapMapName.addEventListener("click", changeToForm, false);
+
+    function changeToForm () {
+      // フォームノード作成
+      let mapNameForm = document.createElement('form')
+      mapNameForm.action = "/editmap/newmapname/?_method=put";
+      mapNameForm.method = "post";
+      mapNameForm.id = "newmapname";
+
+      // 地図の新しい名前の挿入フォーム
+      let newMapName = document.createElement("input");
+      newMapName.name = "newmapname";
+      newMapName.style.cssText = "width: 5em;" + "height: 1.25em;"
+
+      // 地図のIDフォーム
+      let mapIdForm = document.createElement("input");
+      mapIdForm.name = "currentMapId";
+      mapIdForm.value = currentMapId;
+      mapIdForm.style = "display: none;"
+
+      // 更新ボタン
+      let nameChangeButton = document.createElement("button");
+      nameChangeButton.type = "submit";
+      nameChangeButton.textContent = "更新する";
+      nameChangeButton.class = "newmapname-button"
+      nameChangeButton.style.cssText = "background-color: green;" + "height: 1.4em;" + "font-size: 1.4vw;" +
+      "border-radius: 8px;" + "margin: 0 0.25em;" + "padding-bottom: 0.1em" + "text-align: center;" + "color: white;"
+
+      // 地図の名前とIDのフォームをノードに挿入
+      mapNameForm.appendChild(newMapName);
+      mapNameForm.appendChild(mapIdForm);
+      mapNameForm.appendChild(nameChangeButton);
+      
+      // 地図名のノードを取得
+      let mapname = document.getElementById("mapname");
+      let mapnameNode = mapname.childNodes[1].id
+
+      // クリック初回のみ、地図名をフォームに切り替え
+      if (mapnameNode === "mapnameCurrent") {
+        mapname.appendChild(mapNameForm);
+        mapname.removeChild(mapnameCurrent);
+      }
+    }
     
     L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.4.0/dist/images/';
     let mapId = !{map_id};

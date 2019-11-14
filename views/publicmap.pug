@@ -1,0 +1,58 @@
+extends layout
+
+block content
+
+  h2(class='heading-wrapper')
+    span #{title}
+
+  section
+    if message
+      p #{message}
+
+  if !map_id
+    ul(class="maplist")
+      if mapList
+        each map in mapList
+          li: a(href='../publicmap/' + map.map_id)  #{map['map_name']}
+  
+  if map_id
+    div(id="mapid")
+
+  script(type='text/javascript').
+    
+    L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.4.0/dist/images/';
+    let mapId = !{map_id};
+    let centerLatitude = !{center_latitude};
+    let centerLongitude = !{center_longitude};
+    let markers = !{JSON.stringify(marker_list)};
+
+    let map = L.map('mapid').setView([centerLatitude, centerLongitude], 14);
+    let osmUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+    const osmAttribute = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>';
+    L.tileLayer(osmUrl,{
+      attribution: osmAttribute,
+      maxZoom: 19,
+    }).addTo(map);
+    
+    // 拡大縮小のボタンの位置を右下に変更
+    map.zoomControl.setPosition('bottomright');
+  
+    // スケールバーを付加
+    L.control.scale({
+      imperial: false,
+      metric: true
+    }).addTo(map);
+
+    // クリックした箇所に配置するマーカーの宣言
+    let latitude = 0;
+    let longitude = 0;
+    let marker = L.marker([latitude, longitude],{icon: L.divIcon({className: 'set-marker'})}).addTo(map);
+
+    function index_marker(map) {
+      let list = markers;
+      Object.keys(list).forEach(function(key) {
+          let marker = L.popup().setContent('<b>' + list[key].title + '</b>' + '<br>' + list[key].comment);
+          L.marker([list[key].latitude, list[key].longitude],{icon: L.divIcon({className: 'marker'})},{title: list[key].title}).bindPopup(marker).addTo(map).on('click', function(e) { check_marker(e); });
+      });
+    };
+    index_marker(map);

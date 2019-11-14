@@ -6,7 +6,6 @@ const logger = require('morgan');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const domain = require('express-domain-middleware');
-const bcrypt = require('bcrypt');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -19,6 +18,7 @@ const viewmap = require('./routes/viewmap');
 const editmap = require('./routes/editmap');
 const find = require('./routes/find');
 const mypage = require('./routes/mypage');
+const publicmap = require('./routes/publicmap');
 
 const app = express();
 
@@ -51,6 +51,7 @@ app.use('/viewmap', viewmap);
 app.use('/editmap', editmap);
 app.use('/find', find);
 app.use('/mypage', mypage);
+app.use('/publicmap', publicmap);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

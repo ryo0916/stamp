@@ -21,7 +21,8 @@ router.get('/:map_id', function(req, res, next) {
           map_name: map[0].map_name,
           center_latitude: map[0].latitude,
           center_longitude: map[0].longitude,
-          marker_list: marker
+          marker_list: marker,
+          public: map[0].public
         });
       } else {
         res.render('index', {
@@ -71,5 +72,28 @@ router.delete('/', function(req, res, next) {
     res.redirect('/editmap/' + map_id);
   });
 });
+
+// 地図名を更新する
+router.put('/newmapname/', function(req, res, next) {
+  let map_id = req.body.currentMapId;
+  let newmapname = req.body.newmapname;
+  let newmapnameQuery = 'UPDATE maps SET map_name = ? WHERE map_id = ?';
+  connection.query(newmapnameQuery, [newmapname, map_id], function(err, rows) {
+    res.redirect('/editmap/' + map_id);
+  });
+});
+
+// 外部公開の切り替え
+router.put('/public/', function(req, res, next) {
+  let map_id = req.body.map_id;
+  let public = req.body.public;
+  console.log(map_id, public)
+  let changepublicQuery = 'UPDATE maps SET public = ? WHERE map_id = ?';
+
+  connection.query(changepublicQuery, [public, map_id], function(err, rows) {
+    res.redirect('/editmap/' + map_id);
+  });
+})
+
 
 module.exports = router;
