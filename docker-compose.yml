@@ -1,0 +1,39 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test
+      TZ: 'Asia/Tokyo'
+
+    ports:
+      - '3306:3306'
+
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./logs:/var/log/mysql
+  
+  app:
+    image: node:12.2
+
+    environment:
+      - DEBUG=app:*
+    
+    ports:
+      - '8080:3000'
+    
+    volumes:
+      - ./src:/app
+
+    working_dir: /app
+
+    command: >
+      /bin/sh -c '
+      npm install &&
+      npm run dev
+      '
+

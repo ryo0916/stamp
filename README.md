@@ -1,3 +1,9 @@
+### 2024/3/12
+dockerに仮対応。git cloneをして下記でフロントエンドのみ起動。
+```docker-compose run --service-ports app```
+MySQLは未対応。
+動画: https://drive.google.com/file/d/1LeiNpp9AAGp-RiZ8zgDrjjlnnCQUHVER/view?usp=sharing
+
 ## グルメマッピングアプリ stamp
 行ってみたいお店やお気に入りのレストランのある場所にマーカーを付けて保存できるアプリです。
 Node.js, Express, Leaflet.js, Bootstrapで作成しています。
