@@ -1,6 +1,7 @@
 ### 2024/3/12
 dockerに仮対応。git cloneをして下記でフロントエンドのみ起動。  
-```docker-compose run --service-ports app```  
+```docker-compose run --service-ports app```
+http://localhost:8080/ にアクセス
 MySQLは未対応。  
 動画: https://drive.google.com/file/d/1LeiNpp9AAGp-RiZ8zgDrjjlnnCQUHVER/view?usp=sharing  
 
