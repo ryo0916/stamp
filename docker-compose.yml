@@ -4,27 +4,32 @@ services:
     image: mysql:5.7
 
     environment:
-      MYSQL_DATABASE: test
       MYSQL_USER: test
       MYSQL_PASSWORD: test
       MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: test
       TZ: 'Asia/Tokyo'
 
     ports:
       - '3306:3306'
+    
+    networks:
+      - network1
 
     volumes:
-      - ./data:/var/lib/mysql
-      - ./logs:/var/log/mysql
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
   
   app:
     image: node:12.2
 
-    environment:
-      - DEBUG=app:*
-    
     ports:
-      - '8080:3000'
+      - '3000:3000'
+
+    networks:
+      - network1 
+    
+    depends_on:
+      - db
     
     volumes:
       - ./src:/app
@@ -37,3 +42,5 @@ services:
       npm run dev
       '
 
+networks:
+  network1:
