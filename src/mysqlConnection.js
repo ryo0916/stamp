@@ -1,14 +1,14 @@
 const mysql = require('mysql');
 require('dotenv').config();
 
-// local用
+// Docker用
 
 const dbConfig = {
-  host: 'localhost',
+  host: 'db',
   port: 3306,
   user: 'test',
   password: 'test',
-  database: 'test'
+  database: 'stamp'
 };
 
 
@@ -21,7 +21,7 @@ const dbConfig = {
   database: 'heroku_9d81f307dfe298a'
 }
 */
-let connection = mysql.createConnection(dbConfig);
+const connection = mysql.createConnection(dbConfig);
 
 // これはHerokuのMySQLのためのハックです。
 /*
