@@ -1,8 +1,8 @@
-### 2024/3/12
+### 2024/3/27
 dockerに仮対応。git cloneをして下記でフロントエンドのみ起動。  
 ```docker-compose run --service-ports app```  
-http://localhost:8080/ にアクセス  
-MySQLは未対応。  
+http://localhost:3000/ にアクセス  
+MySQLとの接続の際にバグが発生するため、非対応。  
 動画: https://drive.google.com/file/d/1LeiNpp9AAGp-RiZ8zgDrjjlnnCQUHVER/view?usp=sharing  
 
 ## グルメマッピングアプリ stamp
